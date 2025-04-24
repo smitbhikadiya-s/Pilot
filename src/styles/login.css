@@ -1,0 +1,22 @@
+.loginPage{
+    height: 100vh;
+    position: relative;
+    background-image: url('../assets/login_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.loginContainer{
+    max-width: 420px;
+    min-width: 320px;
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 18px;
+}
+
+.ant-card-head{
+    min-height: 78px !important;
+}

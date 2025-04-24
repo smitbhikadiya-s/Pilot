@@ -1,0 +1,7 @@
+.ant-select, .ant-select-selector, .ant-input-number-affix-wrapper, .ant-input-number-affix-wrapper input{
+    min-height: 40px;
+}
+
+.ant-pagination-options .ant-select, .ant-pagination-options .ant-select-selector{
+    min-height: unset;
+}

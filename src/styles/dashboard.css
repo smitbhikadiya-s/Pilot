@@ -1,0 +1,7 @@
+/* .dashboardLayout{
+    height: 100vh;
+} */
+
+.dashboardLayout .ant-image{
+    width: 100%;
+}
