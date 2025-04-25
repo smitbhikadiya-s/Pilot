@@ -22,7 +22,6 @@ interface ParentData {
 const GroupedItemsTable: React.FC = () => {
   const items = useAppSelector((state) => state.menu.items);
 
-  // Group items by category
   const groupedItems = useMemo(
     () =>
       items.reduce((acc: Record<string, Item[]>, item) => {
@@ -33,7 +32,6 @@ const GroupedItemsTable: React.FC = () => {
     [items]
   );
 
-  // Prepare parent data without 'children' property
   const parentData: ParentData[] = useMemo(
     () =>
       Object.keys(groupedItems).map((category) => ({
@@ -43,7 +41,6 @@ const GroupedItemsTable: React.FC = () => {
     [groupedItems]
   );
 
-  // Define columns for the child table
   const childColumns: TableAtomColumnType<Item> = useMemo(
     () => [
       {
@@ -82,7 +79,6 @@ const GroupedItemsTable: React.FC = () => {
     [groupedItems]
   );
 
-  // Define columns for the parent table
   const parentColumns: TableAtomColumnType<ParentData> = useMemo(
     () => [
       {
@@ -114,12 +110,14 @@ const GroupedItemsTable: React.FC = () => {
         columns={parentColumns}
         dataSource={parentData}
         pagination={false}
+        scroll={{ x: 570 }}
         expandable={{
           expandedRowRender: (record) => (
             <TableAtom<Item>
               columns={childColumns}
               dataSource={groupedItems[record.category]}
               pagination={false}
+              scroll={{ x: 570 }}
             />
           ),
         }}
@@ -127,5 +125,7 @@ const GroupedItemsTable: React.FC = () => {
     </>
   );
 };
+
+GroupedItemsTable.displayName = "GroupedItemsTable";
 
 export default GroupedItemsTable;

@@ -9,9 +9,7 @@ import {
 } from "@ant-design/icons";
 import { theme } from "antd";
 import ImageAtom from "../atoms/image";
-import simrestro from "../../assets/simrestro.png";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "../../styles/dashboard.css";
 import { type ItemType, type MenuItemType } from "antd/es/menu/interface";
 import { useAppSelector } from "../../store";
 import ButtonAtom from "../atoms/button";
@@ -19,6 +17,9 @@ import FlexAtom from "../atoms/flex";
 import LayoutAtom from "../atoms/layout";
 import MenuAtom, { MenuAtomProps } from "../atoms/menu";
 import DropdownAtom from "../atoms/dropdown";
+
+import simrestro from "../../assets/simrestro.png";
+import "../../styles/adminlayout.css";
 
 const { Header, Sider, Content } = LayoutAtom;
 
@@ -62,9 +63,8 @@ const AdminLayout: React.FC = () => {
   const defaultSelectedKeys = pathname || MenuItemKey.Dashboard;
 
   return (
-    <LayoutAtom className="dashboardLayout">
-      {/* Repositioned Toggle Button - placed outside the sidebar, top-right of the layout */}
-
+    <LayoutAtom className="dashboard-layout-wrapper">
+      {/* SIDEBAR */}
       <Sider
         trigger={null}
         collapsible
@@ -73,12 +73,12 @@ const AdminLayout: React.FC = () => {
         breakpoint="md"
         onBreakpoint={(broken) => {
           setIsMobile(broken);
-          setCollapsed(broken); // optional: auto-collapse on mobile
+          setCollapsed(broken);
         }}
         style={{
-          height: "100vh",
+          height: "100%",
           zIndex: 1000,
-          position: "fixed", // Keeps it fixed in place
+          position: "fixed",
           left: 0,
           top: 0,
         }}
@@ -89,15 +89,13 @@ const AdminLayout: React.FC = () => {
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
           style={{
-            position: "fixed",
-            top: 16,
             left: collapsed ? "18px" : "218px",
-            zIndex: 1100,
           }}
+          className="dashboard-sidebar-toggler-button"
         />
         <ImageAtom
           src={simrestro}
-          style={{ height: 60, padding: "8px 26px" }}
+          className="dashboard-sidebar-top-image"
           preview={false}
         />
         <MenuAtom
@@ -111,21 +109,19 @@ const AdminLayout: React.FC = () => {
       <LayoutAtom
         style={{
           marginLeft: !isMobile && !collapsed ? 200 : 0,
-          transition: "margin-left 0.2s",
         }}
+        className="dashboard-content-layout-wrapper"
       >
-        {/* HEADER - stays normal as before */}
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        {/* HEADER */}
+        <Header
+          style={{ background: colorBgContainer }}
+          className="dashboard-header"
+        >
           <FlexAtom
-            justify="space-between"
+            justify="end"
             align="center"
-            style={{
-              padding: "0 24px",
-              height: "100%",
-            }}
+            className="dashboard-header-wrapper"
           >
-            {/* Optionally keep this space empty, the button is outside */}
-            <div />
             <FlexAtom gap={4} align="center">
               <DropdownAtom menu={{ items }}>
                 <a onClick={(e) => e.preventDefault()}>
@@ -143,14 +139,13 @@ const AdminLayout: React.FC = () => {
           </FlexAtom>
         </Header>
 
+        {/* CONTENT */}
         <Content
           style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
+          className="dashboard-content"
         >
           <Outlet />
         </Content>

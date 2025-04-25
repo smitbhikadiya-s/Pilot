@@ -1,0 +1,18 @@
+.page-section-wrapper {
+  position: relative;
+  padding: 24px 0;
+}
+
+.page-title {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-actions-wrapper {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

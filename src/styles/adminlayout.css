@@ -1,0 +1,38 @@
+.dashboard-layout-wrapper .ant-image {
+  width: 100%;
+}
+
+.dashboard-sidebar-toggler-button {
+  position: fixed;
+  top: 16px;
+  z-index: 4;
+}
+
+.dashboard-sidebar-top-image {
+  height: 60px;
+  padding: 8px 26px;
+}
+
+.dashboard-content-layout-wrapper {
+  transition: margin-left 0.2;
+}
+
+.dashboard-header {
+  padding: 0;
+}
+
+.dashboard-header-wrapper {
+  padding: 0 24px;
+  height: 100%;
+}
+
+.dashboard-content {
+  margin: 24px 16px;
+  padding: 24px;
+  min-height: 280px;
+
+  @media screen and (max-width: 475px) {
+    padding: 0;
+    margin: 0;
+  }
+}

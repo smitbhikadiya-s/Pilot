@@ -5,7 +5,7 @@ type ConfirmDeleteModalProps = {
   visible: boolean;
   onCancel: () => void;
   onConfirm: () => void;
-  itemName?: string; // optional, for context like "Delete 'Chicken Pizza'?"
+  itemName?: string;
 };
 
 const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
@@ -33,5 +33,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
     </ModalAtom>
   );
 };
+
+ConfirmDeleteModal.displayName = "ConfirmDeleteModal";
 
 export default ConfirmDeleteModal;

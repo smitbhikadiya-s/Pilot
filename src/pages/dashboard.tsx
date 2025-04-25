@@ -1,9 +1,10 @@
 import React from "react";
 import DashboardContainer from "../components/organism/dashboardContainer";
+import '../styles/dashboard.css';
 
 const Dashboard: React.FC = () => {
   return (
-    <div style={{ padding: "24px 16px", maxWidth: 1500, margin: "0 auto" }}>
+    <div className="dashboard">
       <DashboardContainer />
     </div>
   );

@@ -1,10 +1,8 @@
-
 .formContainer {
   max-width: 600px;
   margin: auto;
 }
 
-/* Light theme styles */
 .light-theme .formContainer {
   background: #ffffff;
 }
@@ -29,7 +27,7 @@
   border: none;
 }
 
-.light-theme .ant-btn-primary:hover{
+.light-theme .ant-btn-primary:hover {
   background-color: #294d42 !important;
   border-color: #294d42 !important;
 }
@@ -44,11 +42,9 @@
 .ant-form-item {
   display: flex;
   flex-direction: column;
-  gap: 4px; 
+  gap: 4px;
   margin-bottom: 16px;
 }
-
-
 
 .ant-form-item-control-input {
   width: 100%;
@@ -62,6 +58,6 @@
 .ant-form-item-explain-error {
   color: #ff4d4f;
   font-size: 12px;
-  margin-top: 4px; 
+  margin-top: 4px;
   text-align: left;
 }

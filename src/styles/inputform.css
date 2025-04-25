@@ -1,7 +1,36 @@
-.ant-select, .ant-select-selector, .ant-input-number-affix-wrapper, .ant-input-number-affix-wrapper input{
-    min-height: 40px;
+.ant-select,
+.ant-select-selector,
+.ant-input-number-affix-wrapper,
+.ant-input-number-affix-wrapper input {
+  min-height: 40px;
 }
 
-.ant-pagination-options .ant-select, .ant-pagination-options .ant-select-selector{
-    min-height: unset;
+.ant-pagination-options .ant-select,
+.ant-pagination-options .ant-select-selector {
+  min-height: unset;
 }
+
+.no-found-wrapper{
+    padding: 8px;
+    text-align: center;
+    border-top: 2px solid #f0f0f0;
+}
+
+.no-found-text{
+    color: #999;
+}
+
+.no-found-add-text{
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.upload-btn-text{
+    margin-top: 8px;
+}
+
+.full-width{
+    width: 100%;
+}
+
+
