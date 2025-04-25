@@ -1,7 +1,5 @@
-/* .dashboardLayout{
-    height: 100vh;
-} */
-
-.dashboardLayout .ant-image{
-    width: 100%;
+.dashboard{
+    padding: 24px 16px;
+    max-width: 1500px;
+    margin: 0 auto;
 }

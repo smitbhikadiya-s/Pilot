@@ -5,6 +5,8 @@ import TagAtom from "../atoms/tag";
 import { Category } from "../../interface/types";
 import { Text } from "../atoms/typography";
 
+import '../../styles/recentlyitem.css';
+
 interface Item {
   id: string;
   itemName: string;
@@ -88,23 +90,21 @@ const RecentItemsTable: React.FC = () => {
   return (
     <>
       <Text
-        style={{
-          textAlign: "left",
-          display: "inline-block",
-          margin: 8,
-          marginBottom: 16,
-        }}
+        className="recently-item-title"
       >
         Recently Added Items
       </Text>
       <TableAtom
         columns={columns}
         dataSource={sortedItems}
-        rowKey="id"
+        rowKey="recentItems"
         pagination={false}
+        scroll={{ x: 570 }}
       />
     </>
   );
 };
+
+RecentItemsTable.displayName = "RecentItemsTable";
 
 export default RecentItemsTable;

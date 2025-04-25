@@ -4,8 +4,8 @@ import {
   LockOutlined
 } from "@ant-design/icons";
 import InputAtom from "../atoms/input";
-import "../../styles/form.css";
 import FormAtom from "../atoms/form";
+import "../../styles/form.css";
 
 const LoginFormInput: React.FC = () => {
   return (
@@ -41,5 +41,7 @@ const LoginFormInput: React.FC = () => {
     </>
   );
 };
+
+LoginFormInput.displayName = "LoginFormInput";
 
 export default LoginFormInput;

@@ -12,7 +12,8 @@ import InputAtom from "../atoms/input";
 import ButtonAtom from "../atoms/button";
 import FlexAtom from "../atoms/flex";
 
-// Define what the parent can call using the ref
+import "../../styles/searchtoggle.css";
+
 export interface SearchToggleInputRef {
   reset: () => void;
 }
@@ -21,7 +22,6 @@ interface SearchToggleInputProps {
   onSearchChange: (value: string) => void;
 }
 
-// Define the forward ref function with types
 const SearchToggleInput = forwardRef<SearchToggleInputRef, SearchToggleInputProps>(
   ({ onSearchChange }, ref) => {
     const [expanded, setExpanded] = useState(false);
@@ -52,14 +52,11 @@ const SearchToggleInput = forwardRef<SearchToggleInputRef, SearchToggleInputProp
         align="center"
         style={{
           width: expanded ? 274 : 40,
-          transition: "all 0.3s ease",
-          overflow: "hidden",
-          backgroundColor: "#fff",
-          borderRadius: 6,
           border: expanded ? "1px solid #d9d9d9" : "none",
           paddingLeft: expanded ? 8 : 0,
-          height: 40,
+  
         }}
+        className="search-toggle-flex-wrapper"
       >
         {expanded && (
           <InputAtom
@@ -83,19 +80,13 @@ const SearchToggleInput = forwardRef<SearchToggleInputRef, SearchToggleInputProp
               setExpanded(true);
             }
           }}
-          style={{
-            width: 40,
-            height: 40,
-            border: "none",
-            boxShadow: "none",
-          }}
+          className="search-toggle-button"
         />
       </FlexAtom>
     );
   }
 );
 
-// Add display name for better dev tools/debugging
 SearchToggleInput.displayName = "SearchToggleInput";
 
 export default SearchToggleInput;

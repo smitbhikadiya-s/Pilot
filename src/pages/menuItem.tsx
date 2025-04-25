@@ -20,7 +20,7 @@ const MenuItem = () => {
       data={items}
       categories={categories}
       ingredients={ingredients}
-      onItemAdd={async (item) => {
+      onItemAdd={(item) => {
         dispatch(addItemToMenu(item));
       }}
       onItemEdit={(item) => {

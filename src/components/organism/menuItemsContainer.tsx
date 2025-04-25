@@ -11,6 +11,7 @@ import { Category, Ingredient, ItemFormValues } from "../../interface/types";
 import ButtonAtom from "../atoms/button";
 import SearchToggleInput, { SearchToggleInputRef } from "../molecules/searchToggleInput";
 import ImageAtom from "../atoms/image";
+import { useNotification } from "../../context/notificationContext";
 
 type MenuItemContainerPropType = {
   data: ItemFormValues[];
@@ -49,6 +50,7 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
   const [deleteModalConfig, setDeleteModalConfig] = useState<FormModalType>({
     isOpen: false,
   });
+  const { openNotification } = useNotification()
   const [filteredData, setFilteredData] = useState<ItemFormValues[]>(data);
   const searchRef = useRef<SearchToggleInputRef>(null);
 
@@ -56,8 +58,18 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
     (data: ItemFormValues, id?: string | undefined) => {
       if (formModalConfig.item && id) {
         onItemEdit({ ...data, id });
+        openNotification({
+          message: "Item updated successfully",
+          placement: "top",
+          theme: "success",
+        });
       } else {
         onItemAdd(data);
+        openNotification({
+          message: "Item added successfully",
+          placement: "top",
+          theme: "success",
+        });
       }
       setFormModalConfig({ isOpen: false });
     },
@@ -271,6 +283,11 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
         onConfirm={() => {
           if (deleteModalConfig.item) {
             onItemDelete(deleteModalConfig.item.id);
+            openNotification({
+              message: "Item deleted successfully",
+              placement: "top",
+              theme: "success",
+            });
           }
           setDeleteModalConfig({ isOpen: false, item: undefined });
         }}
@@ -278,5 +295,7 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
     </FlexAtom>
   );
 };
+
+MenuItemContainer.displayName = "MenuItemContainer";
 
 export default MenuItemContainer;

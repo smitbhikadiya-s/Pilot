@@ -3,8 +3,9 @@ import PageSectionHeader from "../molecules/pageSectionHeader";
 import DashboardChartContainer from "./dashboardChartContainer";
 import DashboardTableContainer from "./dashboardTableContainer";
 import StatisticsCardContainer from "../molecules/statisticsCardContainer";
+import React from "react";
 
-const DashboardContainer = () => {
+const DashboardContainer: React.FC = () => {
   return (
     <>
       {/* Header */}
@@ -27,5 +28,7 @@ const DashboardContainer = () => {
     </>
   );
 };
+
+DashboardContainer.displayName = "DashboardContainer";
 
 export default DashboardContainer;

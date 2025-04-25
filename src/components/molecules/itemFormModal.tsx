@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { PlusOutlined } from "@ant-design/icons";
-import "../../styles/inputform.css";
 import { Category, Ingredient, ItemFormValues } from "../../interface/types";
 import { convertBase64ToFileList, getBase64 } from "../../utils/getBase64";
 import ModalAtom from "../atoms/modal";
@@ -11,6 +10,9 @@ import InputAtom from "../atoms/input";
 import InputNumberAtom from "../atoms/inputnumber";
 import SelectAtom from "../atoms/select";
 import UploadAtom from "../atoms/upload";
+import ImageAtom from "../atoms/image";
+
+import "../../styles/inputform.css";
 
 const { Option } = SelectAtom;
 const { TextArea } = InputAtom;
@@ -45,7 +47,6 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
 
   const handleIngredientChange = useCallback(
     (values: string[]) => {
-      console.log([...values], [...ingredients]);
       values.forEach((val) => {
         if (!ingredients.includes(val)) {
           onIngredientAdd(val);
@@ -162,7 +163,6 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
     [ingredients, form, ingredientSearchText]
   );
 
-  // Pre-fill form if editing
   useEffect(() => {
     if (itemToEdit) {
       form.setFieldsValue({
@@ -179,7 +179,6 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
       );
       setFileList(convertedFileList);
 
-      // Update categories and ingredients if any are new
       if (itemToEdit.category && !categories.includes(itemToEdit.category)) {
         onCategoryAdd(itemToEdit.category);
       }
@@ -227,7 +226,7 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
         >
           <InputNumberAtom
             suffix="INR"
-            style={{ width: "100%" }}
+            className="full-width"
             type="number"
             min={1}
             step="1"
@@ -250,9 +249,9 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
             onSearch={(val) => setSearchText(val)}
             onInputKeyDown={handleCategoryKeyDown}
             notFoundContent={
-              <div style={{ textAlign: "center" }}>
-                <div style={{ color: "#999" }}>No category found</div>
-                <div style={{ fontSize: 12, marginTop: 4 }}>
+              <div className="no-found-wrapper">
+                <div className="no-found-text">No category found</div>
+                <div className="no-found-add-text">
                   Press <strong>Enter</strong> to add{" "}
                   <strong>{searchText}</strong>
                 </div>
@@ -320,15 +319,9 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
                   !ingredients
                     .map((i) => i.toLowerCase())
                     .includes(ingredientSearchText.toLowerCase()) && (
-                    <div
-                      style={{
-                        padding: "8px",
-                        textAlign: "center",
-                        borderTop: "1px solid #f0f0f0",
-                      }}
-                    >
-                      <div style={{ color: "#999" }}>No ingredient found</div>
-                      <div style={{ fontSize: 12, marginTop: 4 }}>
+                    <div className="no-found-wrapper">
+                      <div className="no-found-text">No ingredient found</div>
+                      <div className="no-found-add-text">
                         Press <strong>Enter</strong> to add{" "}
                         <strong>{ingredientSearchText}</strong>
                       </div>
@@ -379,7 +372,7 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
             {fileList.length >= 5 ? null : (
               <div>
                 <PlusOutlined />
-                <div style={{ marginTop: 8 }}>Upload</div>
+                <div className="upload-btn-text">Upload</div>
               </div>
             )}
           </UploadAtom>
@@ -389,12 +382,14 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
             footer={null}
             onCancel={() => setPreviewVisible(false)}
           >
-            <img alt="Preview" style={{ width: "100%" }} src={previewImage} />
+            <ImageAtom alt="Preview" className="full-width"  src={previewImage} />
           </ModalAtom>
         </FormAtom.Item>
       </FormAtom>
     </ModalAtom>
   );
 };
+
+ItemFormModal.displayName = "ItemFormModal";
 
 export default ItemFormModal;

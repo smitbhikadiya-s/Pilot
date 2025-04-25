@@ -1,0 +1,14 @@
+.search-toggle-flex-wrapper{
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 6px;
+    height: 40px;
+}
+
+.search-toggle-button{
+    width: 40px;
+    height: 40px;
+    border: none;
+    box-shadow: none;
+}

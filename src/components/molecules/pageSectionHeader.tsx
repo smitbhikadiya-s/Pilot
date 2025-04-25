@@ -2,6 +2,8 @@ import FlexAtom from "../atoms/flex";
 import { ReactNode } from "react";
 import { Title } from "../atoms/typography";
 
+import "../../styles/pagesection.css";
+
 interface PageSectionHeaderPropType {
   title: string;
   actions?: ReactNode[];
@@ -12,16 +14,13 @@ const PageSectionHeader: React.FC<PageSectionHeaderPropType> = ({
   actions,
 }) => {
   return (
-    <div style={{ position: "relative", padding: "24px 0" }}>
+    <div className="page-section-wrapper">
       <Title
         level={2}
         style={{
-          margin: 0,
           paddingRight: actions && actions.length > 0 ? "100px" : 0,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
         }}
+        className="page-title"
       >
         {title}
       </Title>
@@ -29,16 +28,10 @@ const PageSectionHeader: React.FC<PageSectionHeaderPropType> = ({
       {actions && actions.length > 0 && (
         <FlexAtom
           gap={8}
-          style={{
-            position: "absolute",
-            right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-end",
-            rowGap: "8px",
-          }}
+          wrap="wrap"
+          justify="flex-end"
+          align="center"
+          className="page-actions-wrapper"
         >
           {actions}
         </FlexAtom>
@@ -46,5 +39,7 @@ const PageSectionHeader: React.FC<PageSectionHeaderPropType> = ({
     </div>
   );
 };
+
+PageSectionHeader.displayName = "PageSectionHeader";
 
 export default PageSectionHeader;

@@ -14,28 +14,23 @@ const LoginContainer: React.FC<LoginFormContainerProps> = ({
 }) => {
   const [form] = FormAtom.useForm();
 
-  const handleSubmit = useCallback((values: LoginFormData) => {
-    const newFormData: LoginFormData = {
-      ...values,
-    };
-    updateFormData(newFormData);
-    form.resetFields();
-  }, [form, updateFormData]);
+  const handleSubmit = useCallback(
+    (values: LoginFormData) => {
+      const newFormData: LoginFormData = {
+        ...values,
+      };
+      updateFormData(newFormData);
+      form.resetFields();
+    },
+    [form, updateFormData]
+  );
 
   return (
-    <div className="loginContainer">
+    <div className="login-container">
       <CardAtom
         title={<ImageAtom src={simrestro} height={50} preview={false} />}
         bordered={false}
-        style={{
-          maxWidth: "420px",
-          minWidth: "320px",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
-          borderRadius: "12px",
-          background: "#badfda",
-          fontSize: "var(--formInputTextSize)",
-          textAlign: "center",
-        }}
+        className="login-container-card"
       >
         <FormAtom form={form} onFinish={handleSubmit} layout="vertical">
           <LoginFormInput />
@@ -49,5 +44,7 @@ const LoginContainer: React.FC<LoginFormContainerProps> = ({
     </div>
   );
 };
+
+LoginContainer.displayName = "LoginContainer";
 
 export default LoginContainer;

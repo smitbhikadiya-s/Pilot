@@ -32,6 +32,7 @@ const DashboardPieChart: React.FC = () => {
       data,
       angleField: "value",
       colorField: "type",
+     
       label: {
         text: "type",
         style: {
@@ -62,5 +63,7 @@ const DashboardPieChart: React.FC = () => {
     </>
   );
 };
+
+DashboardPieChart.displayName = "DashboardPieChart";
 
 export default memo(DashboardPieChart);

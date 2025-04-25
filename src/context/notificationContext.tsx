@@ -16,7 +16,7 @@ type NotificationType = {
 };
 
 interface NotificationContextValue {
-  openNotificationWithIcon: (arg: NotificationType) => void;
+  openNotification: (arg: NotificationType) => void;
 }
 
 const NotificationContext = createContext<NotificationContextValue | undefined>(
@@ -38,7 +38,7 @@ export const NotificationProvider: React.FC<{
 }> = ({ children }) => {
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotificationWithIcon = useCallback(
+  const openNotification = useCallback(
     ({ message, theme, description, placement }: NotificationType) => {
       api[theme]({
         message,
@@ -50,7 +50,7 @@ export const NotificationProvider: React.FC<{
   );
 
   const contextValue: NotificationContextValue = {
-    openNotificationWithIcon,
+    openNotification,
   };
 
   return (

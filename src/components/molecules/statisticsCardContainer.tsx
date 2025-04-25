@@ -51,7 +51,7 @@ const StatisticsCardContainer = () => {
   return (
     <>
       {stats.map((stat) => (
-        <ColAtom xs={24} sm={12} md={8} key={stat.title}>
+        <ColAtom xs={24} sm={24} md={16} lg={8} key={stat.title}>
           <CardAtom
             bordered={false}
             style={{
@@ -65,7 +65,7 @@ const StatisticsCardContainer = () => {
             bodyStyle={{ padding: 0 }}
             hoverable
           >
-            <FlexAtom align="center" gap={16}>
+            <FlexAtom align="center" justify="center" gap={16}>
               {stat.icon}
               <div>
                 <Text type="secondary">{stat.title}</Text>
@@ -80,5 +80,7 @@ const StatisticsCardContainer = () => {
     </>
   );
 };
+
+StatisticsCardContainer.displayName = "StatisticsCardContainer";
 
 export default StatisticsCardContainer;
