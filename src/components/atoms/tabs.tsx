@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { Tabs, TabsProps } from "antd";
+import React, { memo } from 'react';
+import { Tabs, TabsProps } from 'antd';
 
 export const { TabPane } = Tabs;
 

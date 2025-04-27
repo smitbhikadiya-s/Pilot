@@ -1,7 +1,7 @@
-import { Modal, type ModalProps } from "antd";
-import React, { memo } from "react";
+import { Modal, type ModalProps } from 'antd';
+import React, { memo } from 'react';
 
-const ModalAtom: React.FC<ModalProps> = (props) => {
+const ModalAtom: React.FC<ModalProps> = props => {
   return <Modal {...props} />;
 };
 

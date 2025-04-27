@@ -1,6 +1,6 @@
-import { Switch, SwitchProps } from "antd";
+import { Switch, SwitchProps } from 'antd';
 
-import React, { memo } from "react";
+import React, { memo } from 'react';
 
 const SwitchAtom: React.FC<SwitchProps> = ({ ...props }) => {
   return <Switch {...props} />;

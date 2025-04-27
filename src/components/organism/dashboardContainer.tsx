@@ -1,9 +1,9 @@
-import RowAtom from "../atoms/row";
-import PageSectionHeader from "../molecules/pageSectionHeader";
-import DashboardChartContainer from "./dashboardChartContainer";
-import DashboardTableContainer from "./dashboardTableContainer";
-import StatisticsCardContainer from "../molecules/statisticsCardContainer";
-import React from "react";
+import RowAtom from '../atoms/row';
+import PageSectionHeader from '../molecules/pageSectionHeader';
+import DashboardChartContainer from './dashboardChartContainer';
+import DashboardTableContainer from './dashboardTableContainer';
+import StatisticsCardContainer from '../molecules/statisticsCardContainer';
+import React from 'react';
 
 const DashboardContainer: React.FC = () => {
   return (
@@ -29,6 +29,6 @@ const DashboardContainer: React.FC = () => {
   );
 };
 
-DashboardContainer.displayName = "DashboardContainer";
+DashboardContainer.displayName = 'DashboardContainer';
 
 export default DashboardContainer;

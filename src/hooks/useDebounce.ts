@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 function useDebounce(value: string, delay: number = 300): string {
   const [debouncedValue, setDebouncedValue] = useState(value);

@@ -1,15 +1,16 @@
-import { notification } from "antd";
-import { createContext, useCallback, useContext, type ReactNode } from "react";
+import React from 'react';
+import { notification } from 'antd';
+import { createContext, useCallback, useContext, type ReactNode } from 'react';
 
 type NotificationType = {
-  theme: "success" | "info" | "warning" | "error";
+  theme: 'success' | 'info' | 'warning' | 'error';
   placement:
-    | "top"
-    | "topLeft"
-    | "topRight"
-    | "bottom"
-    | "bottomLeft"
-    | "bottomRight"
+    | 'top'
+    | 'topLeft'
+    | 'topRight'
+    | 'bottom'
+    | 'bottomLeft'
+    | 'bottomRight'
     | undefined;
   message: string;
   description?: string;
@@ -20,14 +21,14 @@ interface NotificationContextValue {
 }
 
 const NotificationContext = createContext<NotificationContextValue | undefined>(
-  undefined
+  undefined,
 );
 
-export const useNotification = () => {
+export const useNotification: () => NotificationContextValue = () => {
   const context = useContext(NotificationContext);
   if (!context) {
     throw new Error(
-      "useNotification must be used within a NotificationProvider"
+      'useNotification must be used within a NotificationProvider',
     );
   }
   return context;
@@ -46,7 +47,7 @@ export const NotificationProvider: React.FC<{
         placement,
       });
     },
-    [api]
+    [api],
   );
 
   const contextValue: NotificationContextValue = {

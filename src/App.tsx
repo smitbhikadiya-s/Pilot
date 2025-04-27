@@ -1,17 +1,17 @@
-import React, { type ReactNode } from "react";
+import React, { type ReactNode } from 'react';
 
-import { ThemeProvider } from "./context/themeContext";
-import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import AdminLayout from "./components/organism/adminLayout";
-import MenuItem from "./pages/menuItem";
-import { useAppSelector } from "./store";
-import { NotificationProvider } from "./context/notificationContext";
-import Logout from "./pages/logout";
+import { ThemeProvider } from './context/themeContext';
+import Login from './pages/login';
+import Dashboard from './pages/dashboard';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import AdminLayout from './components/organism/adminLayout';
+import MenuItem from './pages/menuItem';
+import { useAppSelector } from './store';
+import { NotificationProvider } from './context/notificationContext';
+import Logout from './pages/logout';
 
 const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   return isLoggedIn ? <>{children}</> : <Navigate to="/login" />;
 };
 

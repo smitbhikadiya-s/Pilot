@@ -1,13 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ItemFormValues } from "../../interface/types";
-import { v4 as uuidv4 } from "uuid";
-
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ItemFormValues } from '../../interface/types';
+import { v4 as uuidv4 } from 'uuid';
 
 type NewItemType = ItemFormValues & {
   id: string;
   createdAt?: string;
   updatedAt?: string;
-}
+};
 
 export interface IntialState {
   ingredients: string[];
@@ -17,30 +16,30 @@ export interface IntialState {
 
 const initialState: IntialState = {
   ingredients: [
-    "Tomato",
-    "Lettuce",
-    "Cheese",
-    "Onions",
-    "Pickles",
-    "Ketchup",
-    "Mayonnaise",
-    "Mushrooms",
-    "Garlic",
-    "Spinach",
-    "Avocado",
+    'Tomato',
+    'Lettuce',
+    'Cheese',
+    'Onions',
+    'Pickles',
+    'Ketchup',
+    'Mayonnaise',
+    'Mushrooms',
+    'Garlic',
+    'Spinach',
+    'Avocado',
   ],
   categories: [
-    "Appetizers",
-    "Main Course",
-    "Beverages",
-    "Desserts",
-    "Combo Meals",
+    'Appetizers',
+    'Main Course',
+    'Beverages',
+    'Desserts',
+    'Combo Meals',
   ],
   items: [],
 };
 
 const menuSlice = createSlice({
-  name: "menu",
+  name: 'menu',
   initialState,
   reducers: {
     addItemToMenu: (state, action: PayloadAction<ItemFormValues>) => {
@@ -53,14 +52,12 @@ const menuSlice = createSlice({
       } as NewItemType;
       state.items.push(newItem);
     },
-    updateItem: (
-      state,
-      { payload }: PayloadAction<NewItemType>
-    ) => {
+    updateItem: (state, { payload }: PayloadAction<NewItemType>) => {
       const timestamp = new Date().toISOString();
-      const index = state.items.findIndex((item) => item.id == payload.id);
+      const index = state.items.findIndex(item => item.id == payload.id);
       if (index >= 0) {
         const updatedItem = {
+          ...state.items[index],
           ...payload,
           updatedAt: timestamp,
         } as NewItemType;
@@ -70,9 +67,9 @@ const menuSlice = createSlice({
     },
     deleteItemFromMenu: (
       state,
-      { payload: { id } }: PayloadAction<{ id: string }>
+      { payload: { id } }: PayloadAction<{ id: string }>,
     ) => {
-      const index = state.items.findIndex((item) => item.id == id);
+      const index = state.items.findIndex(item => item.id == id);
       if (index >= 0) {
         state.items.splice(index, 1);
       }

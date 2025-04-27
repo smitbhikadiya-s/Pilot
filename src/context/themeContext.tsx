@@ -19,7 +19,9 @@ export const useTheme = (): ThemeContextType => {
   return context;
 };
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
   const toggleTheme = (): void => {
@@ -37,5 +39,9 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     toggleTheme,
   };
 
-  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };

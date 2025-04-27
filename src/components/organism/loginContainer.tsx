@@ -1,13 +1,13 @@
-import ButtonAtom from "../atoms/button";
-import LoginFormInput from "../molecules/loginFormInput";
-import CardAtom from "../atoms/card";
-import "../../styles/form.css";
-import "../../styles/login.css";
-import ImageAtom from "../atoms/image";
-import simrestro from "../../assets/simrestro.png";
-import { LoginFormContainerProps, LoginFormData } from "../../interface/types";
-import FormAtom from "../atoms/form";
-import { useCallback } from "react";
+import React, { useCallback } from 'react';
+import ButtonAtom from '../atoms/button';
+import LoginFormInput from '../molecules/loginFormInput';
+import CardAtom from '../atoms/card';
+import '../../styles/form.css';
+import '../../styles/login.css';
+import ImageAtom from '../atoms/image';
+import simrestro from '../../assets/simrestro.png';
+import { LoginFormContainerProps, LoginFormData } from '../../interface/types';
+import FormAtom from '../atoms/form';
 
 const LoginContainer: React.FC<LoginFormContainerProps> = ({
   updateFormData,
@@ -22,7 +22,7 @@ const LoginContainer: React.FC<LoginFormContainerProps> = ({
       updateFormData(newFormData);
       form.resetFields();
     },
-    [form, updateFormData]
+    [form, updateFormData],
   );
 
   return (
@@ -45,6 +45,6 @@ const LoginContainer: React.FC<LoginFormContainerProps> = ({
   );
 };
 
-LoginContainer.displayName = "LoginContainer";
+LoginContainer.displayName = 'LoginContainer';
 
 export default LoginContainer;

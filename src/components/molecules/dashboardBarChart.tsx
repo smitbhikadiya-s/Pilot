@@ -1,11 +1,11 @@
-import React, { memo, useMemo } from "react";
-import { useAppSelector } from "../../store";
-import { Title } from "../atoms/typography";
-import BarAtom, { BarAtomConfig } from "../atoms/bar";
-import EmptyAtom from "../atoms/empty";
+import React, { memo, useMemo } from 'react';
+import { useAppSelector } from '../../store';
+import { Title } from '../atoms/typography';
+import BarAtom, { BarAtomConfig } from '../atoms/bar';
+import EmptyAtom from '../atoms/empty';
 
 const DashboardBarChart: React.FC = () => {
-  const items = useAppSelector((state) => state.menu.items) || [];
+  const items = useAppSelector(state => state.menu.items);
 
   const ingredientCounts = useMemo(
     () =>
@@ -15,7 +15,7 @@ const DashboardBarChart: React.FC = () => {
         });
         return acc;
       }, {}),
-    [items]
+    [items],
   );
 
   const data = useMemo(
@@ -24,27 +24,27 @@ const DashboardBarChart: React.FC = () => {
         .map(([ingredient, count]) => ({ ingredient, count }))
         .sort((a, b) => b.count - a.count)
         .slice(0, 5),
-    [ingredientCounts]
+    [ingredientCounts],
   );
 
   const config: BarAtomConfig = useMemo(
     () => ({
       data,
-      xField: "ingredient",
-      yField: "count",
-      colorField: "ingredient",
+      xField: 'ingredient',
+      yField: 'count',
+      colorField: 'ingredient',
       legend: true,
       label: {
-        position: "middle",
+        position: 'middle',
         style: {
-          fill: "#fff",
+          fill: '#fff',
           fontSize: 12,
         },
-        text: "count",
+        text: 'count',
       },
-      interactions: [{ type: "active-region" }],
+      interactions: [{ type: 'active-region' }],
     }),
-    [data]
+    [data],
   );
 
   return (
@@ -54,13 +54,13 @@ const DashboardBarChart: React.FC = () => {
       ) : (
         <EmptyAtom description="No data available to display." />
       )}
-      <Title level={5} style={{ textAlign: "center", marginTop: 16 }}>
+      <Title level={5} style={{ textAlign: 'center', marginTop: 16 }}>
         Top 5 Most Used Ingredients Across All Items
       </Title>
     </>
   );
 };
 
-DashboardBarChart.displayName = "DashboardBarChart";
+DashboardBarChart.displayName = 'DashboardBarChart';
 
 export default memo(DashboardBarChart);

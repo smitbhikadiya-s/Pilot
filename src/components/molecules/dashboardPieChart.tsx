@@ -1,11 +1,11 @@
-import React, { memo, useMemo } from "react";
-import { useAppSelector } from "../../store";
-import EmptyAtom from "../atoms/empty";
-import { Title } from "../atoms/typography";
-import PieAtom, { PieAtomConfig } from "../atoms/pie";
+import React, { memo, useMemo } from 'react';
+import { useAppSelector } from '../../store';
+import EmptyAtom from '../atoms/empty';
+import { Title } from '../atoms/typography';
+import PieAtom, { PieAtomConfig } from '../atoms/pie';
 
 const DashboardPieChart: React.FC = () => {
-  const items = useAppSelector((state) => state.menu.items);
+  const items = useAppSelector(state => state.menu.items);
 
   const categoryCounts = useMemo(
     () =>
@@ -15,7 +15,7 @@ const DashboardPieChart: React.FC = () => {
         }
         return acc;
       }, {}),
-    [items]
+    [items],
   );
 
   const data = useMemo(
@@ -24,30 +24,30 @@ const DashboardPieChart: React.FC = () => {
         type: category,
         value: count,
       })),
-    [categoryCounts]
+    [categoryCounts],
   );
 
   const config: PieAtomConfig = useMemo(
     () => ({
       data,
-      angleField: "value",
-      colorField: "type",
-     
+      angleField: 'value',
+      colorField: 'type',
+
       label: {
-        text: "type",
+        text: 'type',
         style: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
         },
       },
       legend: {
         color: {
           title: false,
-          position: "top",
+          position: 'top',
           rowPadding: 5,
         },
       },
     }),
-    [data]
+    [data],
   );
 
   return (
@@ -57,13 +57,13 @@ const DashboardPieChart: React.FC = () => {
       ) : (
         <EmptyAtom description="No data available to display." />
       )}
-      <Title level={5} style={{ textAlign: "center", marginTop: 16 }}>
+      <Title level={5} style={{ textAlign: 'center', marginTop: 16 }}>
         Number of Items in Each Category
       </Title>
     </>
   );
 };
 
-DashboardPieChart.displayName = "DashboardPieChart";
+DashboardPieChart.displayName = 'DashboardPieChart';
 
 export default memo(DashboardPieChart);
