@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
-import { useAppSelector } from "../../store";
-import TableAtom, { TableAtomColumnType } from "../atoms/table";
-import TagAtom from "../atoms/tag";
-import { Category } from "../../interface/types";
-import { Text } from "../atoms/typography";
+import React, { useMemo } from 'react';
+import { useAppSelector } from '../../store';
+import TableAtom, { TableAtomColumnType } from '../atoms/table';
+import TagAtom from '../atoms/tag';
+import { Category } from '../../interface/types';
+import { Text } from '../atoms/typography';
 
 import '../../styles/recentlyitem.css';
 
@@ -18,7 +18,7 @@ interface Item {
 }
 
 const RecentItemsTable: React.FC = () => {
-  const items = useAppSelector((state) => state.menu.items);
+  const items = useAppSelector(state => state.menu.items);
 
   const sortedItems = useMemo(
     () =>
@@ -26,33 +26,33 @@ const RecentItemsTable: React.FC = () => {
         .sort(
           (a, b) =>
             new Date(b.createdAt || 0).getTime() -
-            new Date(a.createdAt || 0).getTime()
+            new Date(a.createdAt || 0).getTime(),
         )
         .slice(0, 10),
-    [items]
+    [items],
   );
 
   const columns: TableAtomColumnType<Item> = useMemo(
     () => [
       {
-        title: "Item Name",
-        dataIndex: "itemName",
-        key: "itemName",
+        title: 'Item Name',
+        dataIndex: 'itemName',
+        key: 'itemName',
         render: (text: string) => (
-          <span style={{ fontWeight: 600, fontSize: "16px" }}>{text}</span>
+          <span style={{ fontWeight: 600, fontSize: '16px' }}>{text}</span>
         ),
         width: 150,
       },
       {
-        title: "Category",
-        dataIndex: ["category"],
-        key: "category",
+        title: 'Category',
+        dataIndex: ['category'],
+        key: 'category',
         render: (label: Category) => (
           <TagAtom
             color="purple"
             style={{
               fontWeight: 500,
-              maxWidth: "max-content",
+              maxWidth: 'max-content',
             }}
           >
             {label}
@@ -61,39 +61,35 @@ const RecentItemsTable: React.FC = () => {
         width: 100,
       },
       {
-        title: "Ingredients",
-        dataIndex: "ingredients",
-        key: "ingredients",
+        title: 'Ingredients',
+        dataIndex: 'ingredients',
+        key: 'ingredients',
         render: (ingredients: string[]) => (
           <>
-            {ingredients.map((ingredient) => (
+            {ingredients.map(ingredient => (
               <TagAtom key={ingredient}>{ingredient}</TagAtom>
             ))}
           </>
         ),
       },
       {
-        title: "Pricing",
-        dataIndex: "pricing",
-        key: "pricing",
+        title: 'Pricing',
+        dataIndex: 'pricing',
+        key: 'pricing',
         render: (price: number) => `₹${price}`,
       },
       {
-        title: "Description",
-        dataIndex: "description",
-        key: "description",
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
       },
     ],
-    []
+    [],
   );
 
   return (
     <>
-      <Text
-        className="recently-item-title"
-      >
-        Recently Added Items
-      </Text>
+      <Text className="recently-item-title">Recently Added Items</Text>
       <TableAtom
         columns={columns}
         dataSource={sortedItems}
@@ -105,6 +101,6 @@ const RecentItemsTable: React.FC = () => {
   );
 };
 
-RecentItemsTable.displayName = "RecentItemsTable";
+RecentItemsTable.displayName = 'RecentItemsTable';
 
 export default RecentItemsTable;

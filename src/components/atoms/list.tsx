@@ -1,8 +1,8 @@
 import { List, ListProps } from 'antd';
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 // Define your wrapper
-const ListAtom = <T,>(props: ListProps<T>) => {
+const ListAtom = <T,>(props: ListProps<T>): React.ReactElement => {
   return <List<T> {...props} />;
 };
 

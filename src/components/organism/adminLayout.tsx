@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BarChartOutlined,
   BarsOutlined,
@@ -6,32 +6,32 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { theme } from "antd";
-import ImageAtom from "../atoms/image";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { type ItemType, type MenuItemType } from "antd/es/menu/interface";
-import { useAppSelector } from "../../store";
-import ButtonAtom from "../atoms/button";
-import FlexAtom from "../atoms/flex";
-import LayoutAtom from "../atoms/layout";
-import MenuAtom, { MenuAtomProps } from "../atoms/menu";
-import DropdownAtom from "../atoms/dropdown";
+} from '@ant-design/icons';
+import { theme } from 'antd';
+import ImageAtom from '../atoms/image';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { type ItemType, type MenuItemType } from 'antd/es/menu/interface';
+import { useAppSelector } from '../../store';
+import ButtonAtom from '../atoms/button';
+import FlexAtom from '../atoms/flex';
+import LayoutAtom from '../atoms/layout';
+import MenuAtom, { MenuAtomProps } from '../atoms/menu';
+import DropdownAtom from '../atoms/dropdown';
 
-import simrestro from "../../assets/simrestro.png";
-import "../../styles/adminlayout.css";
+import simrestro from '../../assets/simrestro.png';
+import '../../styles/adminlayout.css';
 
 const { Header, Sider, Content } = LayoutAtom;
 
 enum MenuItemKey {
-  Dashboard = "/",
-  Menu = "/menu",
+  Dashboard = '/',
+  Menu = '/menu',
 }
 
 const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector(state => state.auth.user);
   const navigate = useNavigate();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -42,21 +42,21 @@ const AdminLayout: React.FC = () => {
     {
       key: MenuItemKey.Dashboard,
       icon: <BarChartOutlined />,
-      label: <Link to={"/"}>Dashboard</Link>,
+      label: <Link to={'/'}>Dashboard</Link>,
     },
     {
       key: MenuItemKey.Menu,
       icon: <BarsOutlined />,
-      label: <Link to={"/menu"}>Menu</Link>,
+      label: <Link to={'/menu'}>Menu</Link>,
     },
   ];
 
-  const items: MenuAtomProps["items"] = [
+  const items: MenuAtomProps['items'] = [
     {
-      key: "2",
-      label: "Logout",
+      key: '2',
+      label: 'Logout',
       icon: <LogoutOutlined />,
-      onClick: () => navigate("/logout"),
+      onClick: () => navigate('/logout'),
     },
   ];
 
@@ -71,14 +71,14 @@ const AdminLayout: React.FC = () => {
         collapsed={collapsed}
         collapsedWidth={0}
         breakpoint="md"
-        onBreakpoint={(broken) => {
+        onBreakpoint={broken => {
           setIsMobile(broken);
           setCollapsed(broken);
         }}
         style={{
-          height: "100%",
+          height: '100%',
           zIndex: 1000,
-          position: "fixed",
+          position: 'fixed',
           left: 0,
           top: 0,
         }}
@@ -89,7 +89,7 @@ const AdminLayout: React.FC = () => {
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
           style={{
-            left: collapsed ? "18px" : "218px",
+            left: collapsed ? '18px' : '218px',
           }}
           className="dashboard-sidebar-toggler-button"
         />
@@ -124,10 +124,10 @@ const AdminLayout: React.FC = () => {
           >
             <FlexAtom gap={4} align="center">
               <DropdownAtom menu={{ items }}>
-                <a onClick={(e) => e.preventDefault()}>
+                <a onClick={e => e.preventDefault()}>
                   <FlexAtom
                     gap={4}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: 'pointer' }}
                     align="center"
                   >
                     {user?.name}

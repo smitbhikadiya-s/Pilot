@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
-import { Input } from "antd";
-import type { InputProps, InputRef } from "antd/es/input";
-import "../../styles/form.css";
+import React, { forwardRef } from 'react';
+import { Input } from 'antd';
+import type { InputProps, InputRef } from 'antd/es/input';
+import '../../styles/form.css';
 
 type InputAtomType = React.ForwardRefExoticComponent<
   InputProps & React.RefAttributes<InputRef>
@@ -14,5 +14,7 @@ const InputAtom = forwardRef<InputRef, InputProps>((props, ref) => {
 }) as InputAtomType;
 
 InputAtom.TextArea = Input.TextArea;
+
+InputAtom.displayName = 'InputAtom';
 
 export default InputAtom;

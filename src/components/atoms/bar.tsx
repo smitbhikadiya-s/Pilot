@@ -1,7 +1,7 @@
-import { Bar, type BarConfig } from "@ant-design/plots";
-import React, { memo } from "react";
+import { Bar, type BarConfig } from '@ant-design/plots';
+import React, { memo } from 'react';
 
-const BarAtom: React.FC<BarConfig> = (props) => {
+const BarAtom: React.FC<BarConfig> = props => {
   return <Bar {...props} />;
 };
 

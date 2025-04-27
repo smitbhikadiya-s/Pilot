@@ -1,5 +1,5 @@
-import { Layout, type LayoutProps } from "antd";
-import React, { FC } from "react";
+import { Layout, type LayoutProps } from 'antd';
+import React, { FC } from 'react';
 
 interface LayoutAtomPropType extends FC<LayoutProps> {
   Header: typeof Layout.Header;
@@ -9,7 +9,7 @@ interface LayoutAtomPropType extends FC<LayoutProps> {
   children?: React.ReactNode;
 }
 
-const LayoutAtom: LayoutAtomPropType = (props) => {
+const LayoutAtom: LayoutAtomPropType = props => {
   return <Layout {...props} />;
 };
 

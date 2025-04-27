@@ -1,8 +1,8 @@
-import FlexAtom from "../atoms/flex";
-import { ReactNode } from "react";
-import { Title } from "../atoms/typography";
+import React, { ReactNode } from 'react';
+import FlexAtom from '../atoms/flex';
+import { Title } from '../atoms/typography';
 
-import "../../styles/pagesection.css";
+import '../../styles/pagesection.css';
 
 interface PageSectionHeaderPropType {
   title: string;
@@ -18,7 +18,7 @@ const PageSectionHeader: React.FC<PageSectionHeaderPropType> = ({
       <Title
         level={2}
         style={{
-          paddingRight: actions && actions.length > 0 ? "100px" : 0,
+          paddingRight: actions && actions.length > 0 ? '100px' : 0,
         }}
         className="page-title"
       >
@@ -40,6 +40,6 @@ const PageSectionHeader: React.FC<PageSectionHeaderPropType> = ({
   );
 };
 
-PageSectionHeader.displayName = "PageSectionHeader";
+PageSectionHeader.displayName = 'PageSectionHeader';
 
 export default PageSectionHeader;

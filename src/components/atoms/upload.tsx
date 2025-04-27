@@ -1,11 +1,11 @@
-import { Upload, type UploadProps } from "antd";
-import React from "react";
+import { Upload, type UploadProps } from 'antd';
+import React from 'react';
 
 interface UploadAtomProps extends React.FC<UploadProps> {
   LIST_IGNORE: typeof Upload.LIST_IGNORE;
 }
 
-const UploadAtom: UploadAtomProps = (props) => {
+const UploadAtom: UploadAtomProps = props => {
   return <Upload {...props} />;
 };
 

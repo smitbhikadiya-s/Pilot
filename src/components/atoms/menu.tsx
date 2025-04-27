@@ -1,7 +1,7 @@
-import { Menu, type MenuProps } from "antd";
-import React, { memo } from "react";
+import { Menu, type MenuProps } from 'antd';
+import React, { memo } from 'react';
 
-const MenuAtom: React.FC<MenuProps> = (props) => {
+const MenuAtom: React.FC<MenuProps> = props => {
   return <Menu {...props} />;
 };
 

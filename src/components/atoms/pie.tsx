@@ -1,7 +1,7 @@
-import { Pie, type PieConfig } from "@ant-design/plots";
-import React, { memo } from "react";
+import { Pie, type PieConfig } from '@ant-design/plots';
+import React, { memo } from 'react';
 
-const PieAtom: React.FC<PieConfig> = (props) => {
+const PieAtom: React.FC<PieConfig> = props => {
   return <Pie {...props} />;
 };
 

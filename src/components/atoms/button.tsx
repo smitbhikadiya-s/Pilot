@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { ButtonProps, Button } from "antd";
+import React, { memo } from 'react';
+import { ButtonProps, Button } from 'antd';
 const ButtonAtom: React.FC<ButtonProps> = ({ ...props }) => {
   return <Button {...props} />;
 };

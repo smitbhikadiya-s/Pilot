@@ -1,17 +1,25 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import TagAtom from "../atoms/tag";
-import { type ColumnsType } from "antd/es/table";
-import FlexAtom from "../atoms/flex";
-import TableAtom from "../atoms/table";
-import PageSectionHeader from "../molecules/pageSectionHeader";
-import ItemFormModal from "../molecules/itemFormModal";
-import ConfirmDeleteModal from "../molecules/itemDeleteModal";
-import { Category, Ingredient, ItemFormValues } from "../../interface/types";
-import ButtonAtom from "../atoms/button";
-import SearchToggleInput, { SearchToggleInputRef } from "../molecules/searchToggleInput";
-import ImageAtom from "../atoms/image";
-import { useNotification } from "../../context/notificationContext";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import TagAtom from '../atoms/tag';
+import { type ColumnsType } from 'antd/es/table';
+import FlexAtom from '../atoms/flex';
+import TableAtom from '../atoms/table';
+import PageSectionHeader from '../molecules/pageSectionHeader';
+import ItemFormModal from '../molecules/itemFormModal';
+import ConfirmDeleteModal from '../molecules/itemDeleteModal';
+import { Category, Ingredient, ItemFormValues } from '../../interface/types';
+import ButtonAtom from '../atoms/button';
+import SearchToggleInput, {
+  SearchToggleInputRef,
+} from '../molecules/searchToggleInput';
+import ImageAtom from '../atoms/image';
+import { useNotification } from '../../context/notificationContext';
 
 type MenuItemContainerPropType = {
   data: ItemFormValues[];
@@ -50,57 +58,57 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
   const [deleteModalConfig, setDeleteModalConfig] = useState<FormModalType>({
     isOpen: false,
   });
-  const { openNotification } = useNotification()
+  const { openNotification } = useNotification();
   const [filteredData, setFilteredData] = useState<ItemFormValues[]>(data);
   const searchRef = useRef<SearchToggleInputRef>(null);
 
   const handleFormSubmit = useCallback(
-    (data: ItemFormValues, id?: string | undefined) => {
+    (formdata: ItemFormValues, id?: string | undefined) => {
       if (formModalConfig.item && id) {
-        onItemEdit({ ...data, id });
+        onItemEdit({ ...formdata, id });
         openNotification({
-          message: "Item updated successfully",
-          placement: "top",
-          theme: "success",
+          message: 'Item updated successfully',
+          placement: 'top',
+          theme: 'success',
         });
       } else {
-        onItemAdd(data);
+        onItemAdd(formdata);
         openNotification({
-          message: "Item added successfully",
-          placement: "top",
-          theme: "success",
+          message: 'Item added successfully',
+          placement: 'top',
+          theme: 'success',
         });
       }
       setFormModalConfig({ isOpen: false });
     },
-    [formModalConfig, onItemAdd, onItemEdit]
+    [formModalConfig, onItemAdd, onItemEdit, openNotification],
   );
 
   const handleItemDelete = useCallback(
     (item: ItemToEdit) => {
       setDeleteModalConfig({ isOpen: true, item });
     },
-    [setDeleteModalConfig]
+    [setDeleteModalConfig],
   );
 
   const columns: ColumnsType<ItemFormValues> = useMemo(
     () => [
       {
-        title: "#",
-        key: "index",
+        title: '#',
+        key: 'index',
         render: (_value, _record, index) => <strong>{index + 1}</strong>,
         width: 80,
       },
       {
-        title: "Category",
-        dataIndex: "category",
-        key: "category",
-        filters: categories.map((cat) => ({ text: cat, value: cat })),
+        title: 'Category',
+        dataIndex: 'category',
+        key: 'category',
+        filters: categories.map(cat => ({ text: cat, value: cat })),
         onFilter: (value, record) => record.category === value,
         render: (label: Category) => (
           <TagAtom
             color="purple"
-            style={{ fontWeight: 500, maxWidth: "max-content" }}
+            style={{ fontWeight: 500, maxWidth: 'max-content' }}
           >
             {label}
           </TagAtom>
@@ -108,19 +116,19 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
         width: 120,
       },
       {
-        title: "Title",
-        dataIndex: "itemName",
-        key: "itemName",
+        title: 'Title',
+        dataIndex: 'itemName',
+        key: 'itemName',
         sorter: (a, b) => a.itemName.localeCompare(b.itemName),
         render: (text: string) => (
-          <span style={{ fontWeight: 600, fontSize: "16px" }}>{text}</span>
+          <span style={{ fontWeight: 600, fontSize: '16px' }}>{text}</span>
         ),
         width: 250,
       },
       {
-        title: "Images",
-        dataIndex: "images",
-        key: "images",
+        title: 'Images',
+        dataIndex: 'images',
+        key: 'images',
         render: (images: string[]) =>
           images.length ? (
             <FlexAtom wrap="wrap" gap="8px">
@@ -131,34 +139,34 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
                   height={50}
                   src={src}
                   alt={`menu-img-${idx}`}
-                  style={{ objectFit: "cover", borderRadius: "6px" }}
+                  style={{ objectFit: 'cover', borderRadius: '6px' }}
                 />
               ))}
             </FlexAtom>
           ) : (
-            "-"
+            '-'
           ),
         width: 250,
       },
       {
-        title: "Ingredients",
-        dataIndex: "ingredients",
-        key: "ingredients",
-        filters: ingredients.map((ing) => ({ text: ing, value: ing })),
+        title: 'Ingredients',
+        dataIndex: 'ingredients',
+        key: 'ingredients',
+        filters: ingredients.map(ing => ({ text: ing, value: ing })),
         onFilter: (value, record) =>
           record.ingredients.includes(value as string),
-        render: (ingredients: Ingredient[]) =>
-          ingredients.length ? (
+        render: (i: Ingredient[]) =>
+          i.length ? (
             <FlexAtom wrap="wrap" gap="8px">
-              {ingredients.map((ingredient) => (
+              {i.map(ingredient => (
                 <TagAtom
                   key={ingredient}
                   style={{
-                    borderRadius: "20px",
-                    fontSize: "12px",
-                    backgroundColor: "#f0f0f0",
-                    color: "#333",
-                    border: "1px solid #ccc",
+                    borderRadius: '20px',
+                    fontSize: '12px',
+                    backgroundColor: '#f0f0f0',
+                    color: '#333',
+                    border: '1px solid #ccc',
                   }}
                 >
                   {ingredient}
@@ -166,40 +174,40 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
               ))}
             </FlexAtom>
           ) : (
-            "-"
+            '-'
           ),
         width: 250,
       },
       {
-        title: "Pricing",
-        dataIndex: "pricing",
-        key: "pricing",
+        title: 'Pricing',
+        dataIndex: 'pricing',
+        key: 'pricing',
         sorter: (a, b) => a.pricing - b.pricing,
         render: (price: number) => `₹${price}`,
         width: 100,
       },
       {
-        title: "Description",
-        dataIndex: "description",
-        key: "description",
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
         render: (desc?: string) => (
-          <span style={{ fontSize: "14px", color: "#555" }}>{desc}</span>
+          <span style={{ fontSize: '14px', color: '#555' }}>{desc}</span>
         ),
       },
       {
-        title: "Actions",
-        key: "action",
-        render: (item) => (
+        title: 'Actions',
+        key: 'action',
+        render: item => (
           <FlexAtom gap="12px">
             <a title="Edit">
               <EditOutlined
-                style={{ fontSize: "20px" }}
+                style={{ fontSize: '20px' }}
                 onClick={() => setFormModalConfig({ isOpen: true, item })}
               />
             </a>
             <a title="Delete">
               <DeleteOutlined
-                style={{ fontSize: "20px" }}
+                style={{ fontSize: '20px' }}
                 onClick={() => handleItemDelete(item)}
               />
             </a>
@@ -208,15 +216,15 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
         width: 100,
       },
     ],
-    [categories, ingredients, data, handleItemDelete]
+    [categories, ingredients, handleItemDelete],
   );
 
-  useEffect(()=>{
-    if(searchRef.current){
+  useEffect(() => {
+    if (searchRef.current) {
       setFilteredData(data);
       searchRef.current.reset();
     }
-  }, [data])
+  }, [data]);
 
   return (
     <FlexAtom vertical>
@@ -226,16 +234,16 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
           <SearchToggleInput
             ref={searchRef}
             key="search"
-            onSearchChange={(query) => {
+            onSearchChange={query => {
               const filtered = data.filter(
-                (item) =>
+                item =>
                   item.itemName.toLowerCase().includes(query) ||
                   item.description?.toLowerCase().includes(query) ||
                   item.pricing.toString().includes(query) ||
                   item.category.toLowerCase().includes(query) ||
-                  item.ingredients.some((ing) =>
-                    ing.toLowerCase().includes(query)
-                  )
+                  item.ingredients.some(ing =>
+                    ing.toLowerCase().includes(query),
+                  ),
               );
               setFilteredData(filtered);
             }}
@@ -260,7 +268,8 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
           showSizeChanger: true,
           defaultCurrent: 1,
           pageSizeOptions: [5, 10, 20, 50],
-          showTotal:(total, range) => `${range[0]}-${range[1]} of ${total} items`
+          showTotal: (total, range) =>
+            `${range[0]}-${range[1]} of ${total} items`,
         }}
         scroll={{ x: 1200 }}
       />
@@ -284,9 +293,9 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
           if (deleteModalConfig.item) {
             onItemDelete(deleteModalConfig.item.id);
             openNotification({
-              message: "Item deleted successfully",
-              placement: "top",
-              theme: "success",
+              message: 'Item deleted successfully',
+              placement: 'top',
+              theme: 'success',
             });
           }
           setDeleteModalConfig({ isOpen: false, item: undefined });
@@ -296,6 +305,6 @@ const MenuItemContainer: React.FC<MenuItemContainerPropType> = ({
   );
 };
 
-MenuItemContainer.displayName = "MenuItemContainer";
+MenuItemContainer.displayName = 'MenuItemContainer';
 
 export default MenuItemContainer;

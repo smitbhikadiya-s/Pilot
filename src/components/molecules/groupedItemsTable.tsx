@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
-import { useAppSelector } from "../../store";
-import TagAtom from "../atoms/tag";
-import { Category } from "../../interface/types";
-import { Text } from "../atoms/typography";
-import TableAtom, { TableAtomColumnType } from "../atoms/table";
+import React, { useMemo } from 'react';
+import { useAppSelector } from '../../store';
+import TagAtom from '../atoms/tag';
+import { Category } from '../../interface/types';
+import { Text } from '../atoms/typography';
+import TableAtom, { TableAtomColumnType } from '../atoms/table';
 
 interface Item {
   id: string;
@@ -20,7 +20,7 @@ interface ParentData {
 }
 
 const GroupedItemsTable: React.FC = () => {
-  const items = useAppSelector((state) => state.menu.items);
+  const items = useAppSelector(state => state.menu.items);
 
   const groupedItems = useMemo(
     () =>
@@ -29,68 +29,68 @@ const GroupedItemsTable: React.FC = () => {
         acc[item.category].push(item);
         return acc;
       }, {}),
-    [items]
+    [items],
   );
 
   const parentData: ParentData[] = useMemo(
     () =>
-      Object.keys(groupedItems).map((category) => ({
+      Object.keys(groupedItems).map(category => ({
         key: category,
         category,
       })),
-    [groupedItems]
+    [groupedItems],
   );
 
   const childColumns: TableAtomColumnType<Item> = useMemo(
     () => [
       {
-        title: "Item Name",
-        dataIndex: "itemName",
-        key: "itemName",
+        title: 'Item Name',
+        dataIndex: 'itemName',
+        key: 'itemName',
         render: (text: string) => (
-          <span style={{ fontWeight: 600, fontSize: "16px" }}>{text}</span>
+          <span style={{ fontWeight: 600, fontSize: '16px' }}>{text}</span>
         ),
         width: 150,
       },
       {
-        title: "Ingredients",
-        dataIndex: "ingredients",
-        key: "ingredients",
+        title: 'Ingredients',
+        dataIndex: 'ingredients',
+        key: 'ingredients',
         render: (ingredients: string[]) => (
           <>
-            {ingredients.map((ingredient) => (
+            {ingredients.map(ingredient => (
               <TagAtom key={ingredient}>{ingredient}</TagAtom>
             ))}
           </>
         ),
       },
       {
-        title: "Pricing",
-        dataIndex: "pricing",
-        key: "pricing",
+        title: 'Pricing',
+        dataIndex: 'pricing',
+        key: 'pricing',
         render: (price: number) => `₹${price}`,
       },
       {
-        title: "Description",
-        dataIndex: "description",
-        key: "description",
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
       },
     ],
-    [groupedItems]
+    [],
   );
 
   const parentColumns: TableAtomColumnType<ParentData> = useMemo(
     () => [
       {
-        title: "Category",
-        dataIndex: "category",
-        key: "category",
+        title: 'Category',
+        dataIndex: 'category',
+        key: 'category',
         render: (label: Category) => (
           <TagAtom
             color="purple"
             style={{
               fontWeight: 500,
-              maxWidth: "max-content",
+              maxWidth: 'max-content',
             }}
           >
             {label} - {groupedItems[label].length} items
@@ -98,12 +98,12 @@ const GroupedItemsTable: React.FC = () => {
         ),
       },
     ],
-    []
+    [groupedItems],
   );
 
   return (
     <>
-      <Text style={{ display: "inline-block", margin: 8, marginBottom: 16 }}>
+      <Text style={{ display: 'inline-block', margin: 8, marginBottom: 16 }}>
         Items Grouped by Category
       </Text>
       <TableAtom<ParentData>
@@ -112,7 +112,7 @@ const GroupedItemsTable: React.FC = () => {
         pagination={false}
         scroll={{ x: 570 }}
         expandable={{
-          expandedRowRender: (record) => (
+          expandedRowRender: record => (
             <TableAtom<Item>
               columns={childColumns}
               dataSource={groupedItems[record.category]}
@@ -126,6 +126,6 @@ const GroupedItemsTable: React.FC = () => {
   );
 };
 
-GroupedItemsTable.displayName = "GroupedItemsTable";
+GroupedItemsTable.displayName = 'GroupedItemsTable';
 
 export default GroupedItemsTable;

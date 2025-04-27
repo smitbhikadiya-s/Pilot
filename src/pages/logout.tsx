@@ -1,15 +1,17 @@
-import { useEffect } from "react";
-import { useAppDispatch } from "../store";
-import { signOutUser } from "../store/features/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../store';
+import { signOutUser } from '../store/features/authSlice';
 
-const Logout = () => {
+const Logout: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(signOutUser());
-    navigate("/");
+    navigate('/');
+    // Intentionally want this effect to run only once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

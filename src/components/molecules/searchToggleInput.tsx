@@ -1,18 +1,18 @@
-import { InputRef } from "antd";
-import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-import {
+import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
-} from "react";
-import useDebounce from "../../hooks/useDebounce";
-import InputAtom from "../atoms/input";
-import ButtonAtom from "../atoms/button";
-import FlexAtom from "../atoms/flex";
+} from 'react';
+import { InputRef } from 'antd';
+import { SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import useDebounce from '../../hooks/useDebounce';
+import InputAtom from '../atoms/input';
+import ButtonAtom from '../atoms/button';
+import FlexAtom from '../atoms/flex';
 
-import "../../styles/searchtoggle.css";
+import '../../styles/searchtoggle.css';
 
 export interface SearchToggleInputRef {
   reset: () => void;
@@ -22,71 +22,73 @@ interface SearchToggleInputProps {
   onSearchChange: (value: string) => void;
 }
 
-const SearchToggleInput = forwardRef<SearchToggleInputRef, SearchToggleInputProps>(
-  ({ onSearchChange }, ref) => {
-    const [expanded, setExpanded] = useState(false);
-    const [value, setValue] = useState("");
-    const inputRef = useRef<InputRef>(null);
+const SearchToggleInput = forwardRef<
+  SearchToggleInputRef,
+  SearchToggleInputProps
+>(({ onSearchChange }, ref) => {
+  const [expanded, setExpanded] = useState(false);
+  const [value, setValue] = useState('');
+  const inputRef = useRef<InputRef>(null);
 
-    const handleDebouncedSearch = useDebounce(value);
+  const handleDebouncedSearch = useDebounce(value);
 
-    useImperativeHandle(ref, () => ({
-      reset: () => {
-        setValue("");
-        setExpanded(false);
-      },
-    }));
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      setValue('');
+      setExpanded(false);
+    },
+  }));
 
-    useEffect(() => {
-      onSearchChange(handleDebouncedSearch);
-    }, [handleDebouncedSearch]);
+  useEffect(() => {
+    onSearchChange(handleDebouncedSearch);
+    // Intentionally want this effect to run only when the value changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleDebouncedSearch]);
 
-    useEffect(() => {
-      if (expanded) {
-        setTimeout(() => inputRef.current?.focus(), 200);
-      }
-    }, [expanded]);
+  useEffect(() => {
+    if (expanded) {
+      setTimeout(() => inputRef.current?.focus(), 200);
+    }
+  }, [expanded]);
 
-    return (
-      <FlexAtom
-        align="center"
-        style={{
-          width: expanded ? 274 : 40,
-          border: expanded ? "1px solid #d9d9d9" : "none",
-          paddingLeft: expanded ? 8 : 0,
-  
-        }}
-        className="search-toggle-flex-wrapper"
-      >
-        {expanded && (
-          <InputAtom
-            ref={inputRef}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder="Search items..."
-            bordered={false}
-            style={{ flex: 1 }}
-          />
-        )}
-        <ButtonAtom
-          icon={expanded ? <CloseOutlined /> : <SearchOutlined />}
-          type="text"
-          onClick={() => {
-            if (expanded) {
-              setExpanded(false);
-              setValue("");
-              onSearchChange("");
-            } else {
-              setExpanded(true);
-            }
-          }}
-          className="search-toggle-button"
+  return (
+    <FlexAtom
+      align="center"
+      style={{
+        width: expanded ? 274 : 40,
+        border: expanded ? '1px solid #d9d9d9' : 'none',
+        paddingLeft: expanded ? 8 : 0,
+      }}
+      className="search-toggle-flex-wrapper"
+    >
+      {expanded && (
+        <InputAtom
+          ref={inputRef}
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          placeholder="Search items..."
+          bordered={false}
+          style={{ flex: 1 }}
         />
-      </FlexAtom>
-    );
-  }
-);
+      )}
+      <ButtonAtom
+        icon={expanded ? <CloseOutlined /> : <SearchOutlined />}
+        type="text"
+        onClick={() => {
+          if (expanded) {
+            setExpanded(false);
+            setValue('');
+            onSearchChange('');
+          } else {
+            setExpanded(true);
+          }
+        }}
+        className="search-toggle-button"
+      />
+    </FlexAtom>
+  );
+});
 
-SearchToggleInput.displayName = "SearchToggleInput";
+SearchToggleInput.displayName = 'SearchToggleInput';
 
 export default SearchToggleInput;
