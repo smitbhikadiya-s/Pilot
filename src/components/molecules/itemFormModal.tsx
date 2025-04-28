@@ -124,7 +124,7 @@ const ItemFormModal = <T extends ItemFormValues = ItemFormValues>({
       file.preview = await getBase64(file.originFileObj as File);
     }
 
-    setPreviewImage(file.url || (file.preview as string));
+    setPreviewImage(file.url || file.preview || '');
     setPreviewVisible(true);
   }, []);
 
