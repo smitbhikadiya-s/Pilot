@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import ColAtom from '../atoms/col';
 import CardAtom from '../atoms/card';
 
@@ -10,14 +10,14 @@ import {
 import { useAppSelector } from '../../store';
 import { Text, Title } from '../atoms/typography';
 import FlexAtom from '../atoms/flex';
+import * as React from 'react';
 
 interface Stats {
   title: string;
   value: number;
-  icon: JSX.Element;
+  icon: React.JSX.Element;
   backgroundColor: string;
 }
-[];
 
 const StatisticsCardContainer: React.FC = () => {
   const { ingredients, categories, items } = useAppSelector(
