@@ -29,5 +29,6 @@ jobs:
             -Dsonar.projectKey=react-pilot-test
             -Dsonar.projectName=React-Pilot-Test
             -Dsonar.sources=src
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
