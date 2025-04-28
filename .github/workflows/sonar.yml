@@ -1,9 +1,12 @@
 name: SonarQube Analysis
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   sonar:
@@ -11,7 +14,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full history for accurate analysis
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,13 +27,14 @@ jobs:
         run: npm install
 
       - name: Run SonarQube Scanner
-        uses: SonarSource/sonarqube-scan-action@v1
+        uses: SonarSource/sonarqube-scan-action@v3.0.0
         with:
-          entryPoint: '/bin/bash'
-          args: |
-            -Dsonar.projectKey=react-pilot-test
-            -Dsonar.projectName=React-Pilot-Test
+          projectBaseDir: .
+          args: >
             -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/index.lcov
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
