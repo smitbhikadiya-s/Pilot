@@ -24,7 +24,10 @@ jobs:
       - name: Run SonarQube Scanner
         uses: SonarSource/sonarqube-scan-action@v1
         with:
-          host-url: ${{ secrets.SONAR_HOST_URL }}
-          token: ${{ secrets.SONAR_TOKEN }}
-          project-key: 'react-pilot-test'
-          project-name: 'React-Pilot-Test'
+          entryPoint: '/bin/bash'
+          args: |
+            -Dsonar.projectKey=react-pilot-test
+            -Dsonar.projectName=React-Pilot-Test
+            -Dsonar.sources=src
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
