@@ -2,9 +2,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import authSlice from './features/authSlice';
+import authSlice, { signInUser, signOutUser } from './features/authSlice';
 import menuSlice from './features/menuSlice';
 import { type Persistor } from 'redux-persist/es/types';
+import * as Sentry from '@sentry/react';
 
 const persistConfig = {
   key: 'root',
@@ -17,9 +18,20 @@ const rootReducer = combineReducers({
 });
 
 const persistentReducer = persistReducer(persistConfig, rootReducer);
+const sentryReduxEnhancer = Sentry.createReduxEnhancer({
+  actionTransformer: action => {
+    if ([signInUser.type, signOutUser.type].includes(action.type)) {
+      return null;
+    }
+    return action;
+  },
+});
 
 export const store = configureStore({
   reducer: persistentReducer,
+  enhancers: getDefaultEnhancers => {
+    return getDefaultEnhancers().concat(sentryReduxEnhancer);
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

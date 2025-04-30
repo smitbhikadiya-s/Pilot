@@ -9,11 +9,14 @@ import MenuItem from './pages/menuItem';
 import { useAppSelector } from './store';
 import { NotificationProvider } from './context/notificationContext';
 import Logout from './pages/logout';
+import * as Sentry from '@sentry/react';
 
 const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   return isLoggedIn ? <>{children}</> : <Navigate to="/login" />;
 };
+
+const SentryRoutes = Sentry.withSentryReactRouterV7Routing(Routes);
 
 const App: React.FC = () => {
   return (
@@ -21,7 +24,7 @@ const App: React.FC = () => {
       <NotificationProvider>
         <ThemeProvider>
           <div className="App">
-            <Routes>
+            <SentryRoutes>
               <Route path="/login" element={<Login />} />
               <Route path="/logout" element={<Logout />} />
 
@@ -36,7 +39,7 @@ const App: React.FC = () => {
                 <Route index element={<Dashboard />} />
                 <Route path="menu" element={<MenuItem />} />
               </Route>
-            </Routes>
+            </SentryRoutes>
           </div>
         </ThemeProvider>
       </NotificationProvider>
@@ -44,4 +47,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);
