@@ -26,7 +26,7 @@
   "devDependencies": {
     "@eslint/js": "^9.25.1",
     "@reduxjs/toolkit": "^2.2.6",
-    "@sonar/scan": "^4.3.0",
+    "@sonar/scan": "^5.1.0",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
